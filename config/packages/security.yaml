@@ -1,0 +1,27 @@
+security:
+    password_hashers:
+        Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface: 'auto'
+
+    role_hierarchy:
+        ROLE_STAFF: ROLE_USER
+        ROLE_ADMIN: ROLE_STAFF
+
+    providers:
+        users_in_memory: { memory: null }
+        # À activer dans feature/auth dès la création de l'entité User :
+        # app_user_provider:
+        #     entity:
+        #         class: App\Entity\User
+        #         property: email
+
+    firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+        main:
+            lazy: true
+            provider: users_in_memory
+
+    access_control:
+        - { path: ^/admin, roles: ROLE_ADMIN }
+        - { path: ^/account, roles: ROLE_USER }
