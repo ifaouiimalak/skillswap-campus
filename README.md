@@ -1,4 +1,4 @@
-# SkillSwap Campus — Projet Symfony 7 (Groupe 4)
+# SkillSwap Campus — Projet Symfony 
 
 **SkillSwap Campus** est une marketplace d'échange de compétences où étudiants et jeunes professionnels réservent des sessions de mentorat ou proposent leurs savoir-faire. Les échanges sont réglés par paiement simulé ou par portefeuille de crédits-temps (**1 heure enseignée = 1 heure réservée**).
 
