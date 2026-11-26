@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon Profil — SkillSwap Campus{% endblock %}
+
+{% block body %}
+<div class="row justify-content-center">
+    <div class="col-md-7">
+        <div class="card shadow-sm border-0">
+            <div class="card-body p-4">
+                <h1 class="h4 fw-bold mb-3">Éditer mon profil</h1>
+                {% if user.avatarFilename %}
+                    <img src="{{ asset('uploads/avatars/' ~ user.avatarFilename) }}" alt="Avatar" class="rounded-circle mb-3" width="80" height="80" style="object-fit: cover;">
+                {% endif %}
+                {{ form_start(form) }}
+                    {{ form_widget(form) }}
+                    <button type="submit" class="btn btn-primary mt-2">Enregistrer les modifications</button>
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Messagerie avant session — SkillSwap Campus{% endblock %}
+
+{% block body %}
+<h1 class="h3 fw-bold mb-4">Messagerie avant session</h1>
+<div class="row g-4">
+    <div class="col-md-5">
+        <div class="card shadow-sm border-0">
+            <div class="card-header bg-white fw-bold">Nouveau message</div>
+            <div class="card-body">
+                {{ form_start(form) }}
+                    {{ form_widget(form) }}
+                    <button type="submit" class="btn btn-primary w-100 mt-2">Envoyer</button>
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+    <div class="col-md-7">
+        <div class="card shadow-sm border-0">
+            <div class="card-header bg-white fw-bold">Historique des échanges</div>
+            <div class="list-group list-group-flush">
+                {% for msg in messages %}
+                    <div class="list-group-item">
+                        <div class="d-flex justify-content-between small text-muted">
+                            <span><strong>{{ msg.sender.fullName }}</strong> → {{ msg.recipient.fullName }}</span>
+                            <span>{{ msg.createdAt|date('d/m/Y H:i') }}</span>
+                        </div>
+                        {% if msg.offer %}
+                            <div class="badge bg-light text-primary border my-1">Offre : {{ msg.offer.title }}</div>
+                        {% endif %}
+                        <p class="mb-0 mt-1">{{ msg.content }}</p>
+                    </div>
+                {% else %}
+                    <div class="list-group-item text-muted">Aucun message pour le moment.</div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -7,12 +7,10 @@ security:
         ROLE_ADMIN: ROLE_STAFF
 
     providers:
-        users_in_memory: { memory: null }
-        # À activer dans feature/auth dès la création de l'entité User :
-        # app_user_provider:
-        #     entity:
-        #         class: App\Entity\User
-        #         property: email
+        app_user_provider:
+            entity:
+                class: App\Entity\User
+                property: email
 
     firewalls:
         dev:
@@ -20,8 +18,24 @@ security:
             security: false
         main:
             lazy: true
-            provider: users_in_memory
+            provider: app_user_provider
+            user_checker: App\Security\UserChecker
+            form_login:
+                login_path: app_login
+                check_path: app_login
+                enable_csrf: true
+                default_target_path: app_account_dashboard
+            logout:
+                path: app_logout
+                target: app_home
+            remember_me:
+                secret: '%kernel.secret%'
+                lifetime: 604800
 
     access_control:
         - { path: ^/admin, roles: ROLE_ADMIN }
+        - { path: ^/staff, roles: ROLE_STAFF }
         - { path: ^/account, roles: ROLE_USER }
+        - { path: ^/bookings, roles: ROLE_USER }
+        - { path: ^/wallet, roles: ROLE_USER }
+        - { path: ^/cart, roles: ROLE_USER }
